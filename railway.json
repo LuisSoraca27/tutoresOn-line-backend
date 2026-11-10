@@ -1,0 +1,13 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "npm ci --include=dev && npm run db:generate"
+  },
+  "deploy": {
+    "preDeployCommand": ["npm run db:deploy && npm run db:seed && if [ \"$SEED_DEMO\" = \"true\" ]; then npm run db:seed:demo; fi"],
+    "startCommand": "npm start",
+    "healthcheckPath": "/api/v1/health",
+    "healthcheckTimeout": 120,
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
